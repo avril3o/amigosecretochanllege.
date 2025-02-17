@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amigo Secreto</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #007BFF; /* Fondo azul */
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        .button {
+            background-color: #FF5733;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            margin-top: 15px;
+            border-radius: 25px;
+            font-size: 18px;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .button:hover {
+            background-color: #C70039;
+            transform: scale(1.05);
+        }
+        img {
+            width: 250px; /* Imagen más grande */
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 24px;
+            color: #007BFF;
+            margin-top: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            width: 100%;
+            margin-top: 20px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+        .below-text-img {
+            width: 100px; /* Tamaño de la segunda imagen */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>¡Sorteo de Amigo Secreto!</h1>
+        <p>Escribe los nombres y haz clic en sortear.</p>
+        <img src="amigo-secreto.png" alt="Amigo Secreto">
+        <input type="text" id="nombre" placeholder="Escribe un nombre">
+        <button id="agregarNombre" class="button">Añadir</button>
+        <button id="botonSortear" class="button">Sortear Amigo</button>
+        <h2 id="resultado"></h2>
+        <img src="play_circle_outline.png" alt="Icono Play" class="below-text-img">
+    </div>
+
+    <script>
+        let listaAmigos = [];
+
+        function sortearAmigo() {
+            if (listaAmigos.length > 1) {
+                const amigoSorteado = Math.floor(Math.random() * listaAmigos.length);
+                document.getElementById("resultado").innerHTML = 
+                    `🎉 Tu amigo secreto es: <strong>${listaAmigos[amigoSorteado]}</strong>`;
+                console.log(`Tu amigo secreto es: ${listaAmigos[amigoSorteado]}`);
+            } else {
+                alert("Debe haber al menos 2 participantes para el sorteo.");
+                console.error("Lista insuficiente para realizar el sorteo.");
+            }
+        }
+
+        document.getElementById("botonSortear").addEventListener("click", sortearAmigo);
+
+        document.getElementById("agregarNombre").addEventListener("click", function() {
+            const nombre = document.getElementById("nombre").value.trim();
+            if (nombre) {
+                listaAmigos.push(nombre);
+                document.getElementById("nombre").value = "";
+                alert(`${nombre} ha sido añadido a la lista.`);
+            }
+        });
+    </script>
+</body>
+</html>
